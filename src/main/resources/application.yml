@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${db.username}
+    password: ${db.password}
+    url: 'jdbc:postgresql://${db.host}:${db.port}/${db.name}'
+  flyway:
+    enabled: true
+
+gcp:
+  kms:
+    projectId: ${gcp.kms.projectId}
+    locationId: ${gcp.kms.locationId}
+    keyRingId: ${gcp.kms.keyRingId}
+    keyId: ${gcp.kms.keyId}

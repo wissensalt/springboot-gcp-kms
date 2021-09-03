@@ -4,7 +4,6 @@ buildscript {
 	}
 
 	dependencies {
-		classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.4.2'
 		classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.2.0.RELEASE'
 	}
 }
@@ -14,8 +13,6 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
-
-apply plugin: 'com.google.cloud.tools.appengine'
 
 group = 'com.wissensalt.rnd'
 version = '0.0.1-SNAPSHOT'
@@ -31,28 +28,19 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', "2020.0.3")
-	set('springDocOpenApiVersion', "1.5.10")
-	set('springOpenApiVersion', "1.5.10")
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation "org.springdoc:springdoc-openapi-ui:${springOpenApiVersion}"
+	implementation platform('com.google.cloud:libraries-bom:22.0.0')
+	implementation 'com.google.cloud:google-cloud-kms'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql:42.2.23'
+
 
 	compileOnly 'org.projectlombok:lombok'
-
 	annotationProcessor 'org.projectlombok:lombok'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
 }
 
 apply plugin: 'java-library'
